@@ -35,8 +35,8 @@
 
 	<aop:aspectj-autoproxy />
 	<mvc:annotation-driven />
-	<bean id="validator"
-		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+	<!-- <bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" /> -->
 
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -48,14 +48,13 @@
 		</property>
 	</bean>
 
-	<import resource="classpath:META-INF/spring/context-fund-base.xml" />
-
-	<bean id="filterChainProxy" class="org.springframework.security.web.FilterChainProxy">
+	
+	<!-- <bean id="filterChainProxy" class="org.springframework.security.web.FilterChainProxy">
 		<security:filter-chain-map path-type="ant">
 			<security:filter-chain pattern="/**"
 				filters="cookieFilter,sessionFilter,requestFilter" />
 		</security:filter-chain-map>
-	</bean>
+	</bean> -->
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"
@@ -117,18 +116,11 @@
 	<mvc:resources mapping="/img/**" location="/img/" />
 	<mvc:default-servlet-handler />
 
-	<!-- 公共页面 -->
+	<!-- 公共页面  将路径转给视图处理   view-name="redirect:/admin/index"-->
 	<mvc:view-controller path="/" view-name="/index" />
 	<mvc:view-controller path="/400" view-name="/400" />
 	<mvc:view-controller path="/401" view-name="/401" />
 	<mvc:view-controller path="/404" view-name="/404" />
-
-
-	<!-- 重定向 -->
-	<!-- <mvc:view-controller path="/fi/insurance/protocal/dsdf"
-		view-name="/prod/fi/insurance/protocal/dsdf" /> -->
-	
-	
 
 <!-- 	<bean id="urlInterceptor"
 		class="com.xiaomi.finance.lc.fund.web.interceptor.UrlInterceptor"></bean>
@@ -149,8 +141,8 @@
 		</mvc:interceptor>
 	</mvc:interceptors> -->
 
-	<import resource="classpath:META-INF/spring/context-fund-service.xml" />
-
+	<!-- <import resource="classpath:META-INF/spring/context-fund-service.xml" />
+ -->
 
 
 </beans>  

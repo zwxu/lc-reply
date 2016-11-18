@@ -117,9 +117,19 @@
 			<version>2.6</version>
 		</dependency>
 		<dependency>
-		    <groupId>joda-time</groupId>
-		    <artifactId>joda-time</artifactId>
-		    <version>2.9.3</version>
+		    <groupId>org.freemarker</groupId>
+          <artifactId>freemarker</artifactId>
+          <version>2.3.19</version>
+		</dependency>
+		<dependency>
+		   <groupId>org.sitemesh</groupId>
+		   <artifactId>sitemesh</artifactId>
+		   <version>3.0.0</version>
+ 		</dependency>
+ 		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
 		</dependency>
 	</dependencies>
 

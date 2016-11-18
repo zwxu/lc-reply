@@ -25,10 +25,6 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-	<!-- <filter> <filter-name>roseFilter</filter-name> <filter-class>net.paoding.rose.RoseFilter</filter-class> 
-		</filter> <filter-mapping> <filter-name>roseFilter</filter-name> <url-pattern>/*</url-pattern> 
-		<dispatcher>REQUEST</dispatcher> <dispatcher>FORWARD</dispatcher> <dispatcher>INCLUDE</dispatcher> 
-		</filter-mapping> -->
 	<!-- 字符集 过滤器 -->
 	<filter>
 		<filter-name>characterEncodingFilterUTF8</filter-name>
@@ -51,7 +47,7 @@
 	<!-- SiteMesh Filter 配置 -->
 	<filter>
 		<filter-name>sitemeshFilter</filter-name>
-		<filter-class>com.xiaomi.finance.lc.fund.base.filter.SiteMeshMetaFilter</filter-class>
+		<filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
 		<init-param>
 			<param-name>prefix</param-name>
 			<param-value>/</param-value>
@@ -71,7 +67,7 @@
 	<!-- Freemarker Filter 配置 -->
 	<filter>
 		<filter-name>freemarkerFilter</filter-name>
-		<filter-class>com.xiaomi.finance.lc.fund.base.filter.FreemarkerFilter</filter-class>
+		<filter-class>com.ustc.zwxu.lc.reply.web.filter.FreemarkerFilter</filter-class>
 		<init-param>
 			<param-name>suffix</param-name>
 			<param-value>.html</param-value>
@@ -89,7 +85,7 @@
 	</filter-mapping>
 
 	<!-- 过滤器链配置 -->
-	<filter>
+	<!-- <filter>
 		<filter-name>delegatingFilterProxy</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 		<init-param>
@@ -100,15 +96,7 @@
 	<filter-mapping>
 		<filter-name>delegatingFilterProxy</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
-	<!-- <filter> <filter-name>encodingFilter</filter-name> <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class> 
-		<init-param> <param-name>encoding</param-name> <param-value>UTF-8</param-value> 
-		</init-param> </filter> <filter-mapping> <filter-name>encodingFilter</filter-name> 
-		<url-pattern>*.htm</url-pattern> </filter-mapping> <filter> <filter-name>ParametersDecryptorFilter</filter-name> 
-		<filter-class>com.xiaomi.passport.sdk.filter.ParametersDecryptorV2Filter</filter-class> 
-		</filter> <filter-mapping> <filter-name>ParametersDecryptorFilter</filter-name> 
-		<url-pattern>/pass/safe/*</url-pattern> </filter-mapping> -->
+	</filter-mapping> -->
 
 
 	<!-- spring mvc 路径映射 -->
@@ -126,7 +114,7 @@
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
-
+    <!-- func-view找对应页面 -->
 	<error-page>
 		<error-code>400</error-code>
 		<location>/400</location>

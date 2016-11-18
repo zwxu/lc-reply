@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="GBK"?>   <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<!--****************************** -->
+	<!-- console define -->
+	<!--****************************** -->
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{dd HH:mm:ss,SSS\} %-5p] [%t] %c{2\} - %m%n" />
+		</layout>
+
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="levelMin" value="DEBUG" />
+			<param name="levelMax" value="ERROR" />
+			<param name="AcceptOnMatch" value="true" />
+		</filter>
+	</appender>
+
+	<!--****************************** -->
+	<!-- log file define -->
+	<!--****************************** -->
+	<appender name="ALL-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="encoding" value="${syslog.encoding}" />
+		<param name="File" value="${syslog.path}/default-all.log" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[%-5p] %d{yyyy-MM-dd HH:mm:ss,SSS} method:%l%n%m%n" />
+		</layout>
+	</appender>		<appender name="REQUEST-API-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">		<param name="encoding" value="${syslog.encoding}" />		<param name="File" value="${syslog.path}/request-api.log" />		<param name="DatePattern" value="'.'yyyy-MM-dd" />		<layout class="org.apache.log4j.PatternLayout">			<param name="ConversionPattern"				value="[%-5p] %d{yyyy-MM-dd HH:mm:ss,SSS} method:%l%n%m%n" />		</layout>	</appender>
+
+	<appender name="ERROR-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="encoding" value="${syslog.encoding}" />
+		<param name="File" value="${syslog.path}/common-error.log" />
+		<param name="Threshold" value="error" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[%-5p] %d{yyyy-MM-dd HH:mm:ss,SSS} method:%l%n%m%n" />
+		</layout>
+	</appender>
+
+	<!--****************************** -->
+	<!-- the root set -->
+	<!--****************************** -->
+	<root>
+		<level value="${syslog.level}" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="ALL-APPENDER" />
+		<appender-ref ref="ERROR-APPENDER" />
+	</root>    <logger name="com.xiaomi.finance.lc.fund.web.logger.XLogger" additivity="false">        <level value="${syslog.level}"/>        <appender-ref ref="REQUEST-API-APPENDER"/>    </logger>		<!-- <appender name="KEYCENTER-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">		<param name="encoding" value="${maven.sys.log.encoding}" />		<param name="File"			value="/home/work/log/${service_name}/${service_name}.log.wf" />		<param name="Threshold" value="error" />		<param name="DatePattern" value="'.'yyyy-MM-dd" />		<layout class="org.apache.log4j.PatternLayout">			<param name="ConversionPattern"				value="[%-5p] %d{yyyy-MM-dd HH:mm:ss,SSS} method:%l%n%m%n" />		</layout>	</appender>	<logger name="keycenter" additivity="false">		<level value="error" />		<appender-ref ref="KEYCENTER-APPENDER" />	</logger> -->
+
+</log4j:configuration>
