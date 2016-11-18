@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ibatorConfiguration PUBLIC "-//Apache Software Foundation//DTD Apache iBATIS Ibator Configuration 1.0//EN" "http://ibatis.apache.org/dtd/ibator-config_1_0.dtd" >
+<ibatorConfiguration >
+ <classPathEntry location="D:\Program Files\maven\respositories\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar"/>
+ 
+  <ibatorContext id="context1" >
+  
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/cashbase_lc_aip" userId="root" password="" />
+     
+    <javaModelGenerator targetPackage="com.ustc.model" targetProject="shop/src/main/java" />
+    <sqlMapGenerator targetPackage="com.ustc.model" targetProject="shop/src/main/java" />
+    <daoGenerator targetPackage="com.ustc.model" targetProject="shop/src/main/java" type="SPRING" />
+    <table schema="cashbase_lc_aip" tableName="t_plan_execute" domainObjectName="PlanExecute">
+      <generatedKey column="ID" sqlStatement="MYSQL" identity="true"  />
+    </table>
+  </ibatorContext>
+</ibatorConfiguration>

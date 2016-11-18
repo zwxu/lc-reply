@@ -1,0 +1,42 @@
+<#assign c=JspTaglibs["http://java.sun.com/jsp/jstl/core"]/>
+<#include '/conf/application.html'>
+<!doctype html>
+<html>
+<head>
+<title>小米金融</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimal-ui">
+<meta name="format-detection" content="telephone=no">
+<link type="text/css" rel="stylesheet" href="<@staticurl path='/app/css/style.css' />" />
+<script src="<@cstaticurl path='/app/js/app.js' />"></script>
+</head>
+</head>
+<body>
+	<div class="g-doc">
+		<div class="g-bd">
+			<div class="u-msg">
+				<em class="icn-warn"></em>
+				<div class="u-note">
+					<h2>当前用户数过多,请稍后再试！</h2>
+					<div class="act">
+						<a class="u-btn6" onclick="gotoIndexPage()"><span class="line">返回</span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	try{
+		var isHomePage = MiFiJsInternal.isHomePage();
+		if(isHomePage){
+			document.querySelector(".u-btn6").onclick=function(e){
+				location.reload();
+			}
+			document.querySelector(".line").innerHTML="刷新";
+		}
+	}catch(e){
+		
+	}
+	</script>
+</body>
+</html>

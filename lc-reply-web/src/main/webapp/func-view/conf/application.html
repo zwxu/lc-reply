@@ -1,0 +1,67 @@
+<#assign localAddress=Application.GLOBAL_RESOURCE.webDynamicRes.localAddress />
+<#assign staticAddress=Application.GLOBAL_RESOURCE.webDynamicRes.staticAddress />
+<#assign staticVersion=Application.GLOBAL_RESOURCE.webDynamicRes.staticVersion />
+<#macro appurl path>
+<#compress>
+	<#assign url>
+		<#compress>
+			${localAddress}${path}
+		</#compress>
+	</#assign>
+	<#if userId??>
+		<#if url?contains("?") >
+			${url}&userId=${userId}
+		<#else>
+			${url}?userId=${userId}
+		</#if>
+	<#else>
+		<#if url?contains("?") >
+			<#if Request['CK_USER_ID']??>
+				${url}&userId=${Request['CK_USER_ID']}
+			<#elseif Session['CURRENT_USER']??>
+				${url}&userId=${Session['CURRENT_USER'].xiaomiId}
+			<#elseif RequestParameters['userId']??>
+				${url}&userId=${RequestParameters['userId']}
+			<#else>
+				${url}
+			</#if>
+		<#else>
+			<#if Request['CK_USER_ID']??>
+				${url}?userId=${Request['CK_USER_ID']}
+			<#elseif Session['CURRENT_USER']??>
+				${url}?userId=${Session['CURRENT_USER'].xiaomiId}
+			<#elseif RequestParameters['userId']??>
+				${url}?userId=${RequestParameters['userId']}
+			<#else>
+				${url}
+			</#if>
+		</#if>
+	</#if>
+</#compress>
+</#macro>
+
+<#macro staticurl path>
+<#compress>
+<#assign url>
+	<#compress>
+		${staticAddress}${path}
+	</#compress>
+</#assign>
+<#if url?contains("?") >
+	${url}&${staticVersion}
+<#else>
+	${url}?${staticVersion}
+</#if>
+</#compress>
+</#macro>
+
+<#macro cstaticurl path>
+<#compress>
+<#assign url>
+	<#compress>
+		${staticAddress}${path}
+	</#compress>
+</#assign>
+${url}
+</#compress>
+</#macro>

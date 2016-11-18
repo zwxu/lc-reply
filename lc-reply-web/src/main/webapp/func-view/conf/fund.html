@@ -1,0 +1,165 @@
+<#macro fundname fundcode=''>
+<#compress>
+	<#if fundcode=='000009'>
+		活期宝
+	<#elseif fundcode=='110026'>
+		易方达创业板ETF联接
+	<#elseif fundcode=='110030'>
+		易方达沪深300联接量化增强
+	<#elseif fundcode=='110019'>
+		易方达深证100ETF联接
+	<#elseif fundcode=='000950'>
+		易方达沪深300非银ETF联接
+	<#elseif fundcode=='DAY7'>
+		定期宝7天		
+	<#elseif fundcode=='DAY15'>
+		半月盈			
+	<#elseif fundcode=='DAY30'>
+		定期宝30天					
+	<#elseif fundcode=='DAY90'>
+		定期宝90天					
+	<#elseif fundcode=='DAY180'>
+		定期宝180天					
+	<#else>
+		未知基金
+	</#if>
+</#compress>
+</#macro>
+
+<#macro fundsimplename fundcode=''>
+<#compress>
+    <#if fundcode=='000009'>
+        活期宝
+    <#elseif fundcode=='110026'>
+        创业板ETF联接
+    <#elseif fundcode=='110030'>
+        沪深300
+    <#elseif fundcode=='110019'>
+        深证100
+    <#elseif fundcode=='000950'>
+        沪深300非银         
+    <#else>
+        未知基金
+    </#if>
+</#compress>
+</#macro>
+
+<#macro risklevel fundcode='' type=''>
+<#compress>
+	<#if fundcode=='110026'>
+		<#if type=='name'>
+			激进型
+		<#else>
+			高
+		</#if>
+	<#elseif fundcode=='110030'>
+		<#if type=='name'>
+			激进型
+		<#else>
+			高
+		</#if>
+	<#elseif fundcode=='110019'>
+		<#if type=='name'>
+			激进型
+		<#else>
+			高
+		</#if>
+	<#elseif fundcode=='000950'>
+		<#if type=='name'>
+			激进型
+		<#else>
+			高
+		</#if>
+	<#elseif fundcode=='DAY180'>
+		<#if type=='name'>
+			保守型
+		<#else>
+			较低
+		</#if>
+	<#elseif fundcode=='DAY90'>
+		<#if type=='name'>
+			保守型
+		<#else>
+			较低
+		</#if>
+	<#elseif fundcode=='DAY30'>
+		<#if type=='name'>
+			保守型
+		<#else>
+			较低
+		</#if>
+	<#elseif fundcode=='DAY15'>
+		<#if type=='name'>
+			保守型
+		<#else>
+			较低
+		</#if>
+	<#elseif fundcode=='DAY7'>
+		<#if type=='name'>
+			保守型
+		<#else>
+			较低
+		</#if>	
+	<#else>
+		未知型
+	</#if>
+</#compress>
+</#macro>
+
+<#macro riskresult fundcode='' userlevel=''>
+<#assign userscore>
+	<#compress>
+		<#if userlevel=='CF'||userlevel=='安益型'>
+			20
+		<#elseif userlevel=='CE'||userlevel=='保守型'>
+			40
+		<#elseif userlevel=='SD'||userlevel=='稳健型'>
+			60
+		<#elseif userlevel=='PE'||userlevel=='积极型'>
+			80
+		<#elseif userlevel=='RL'||userlevel=='激进型'>
+			100
+		<#else>
+			-1
+		</#if>
+	</#compress>
+</#assign>
+<#assign fundscore>
+<#compress>
+	<#if fundcode=='110026'>
+		100
+	<#elseif fundcode=='110030'>
+		100
+	<#elseif fundcode=='110019'>
+		100
+	<#elseif fundcode=='000950'>
+		100
+	<#elseif fundcode=='DAY180'>
+		40
+	<#elseif fundcode=='DAY90'>
+		40
+	<#elseif fundcode=='DAY30'>
+		40
+	<#else>
+		-1
+	</#if>
+</#compress>
+</#assign>
+<#compress>
+<#if userscore?eval==-1 || fundscore?eval==-1>
+error
+<#else>
+	<#if userscore?eval gte fundscore?eval>
+	pass
+	<#else>
+	comfirm
+	</#if>
+</#if>
+</#compress>
+</#macro>
+
+<#macro rrule fundcode=''>
+<#compress>
+    t3
+</#compress>
+</#macro>
