@@ -1,7 +1,8 @@
-package com.ustc.zwxu.lc.reply.web.controller;
+package com.ustc.zwxu.lc.reply.web.controller.api;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,21 +21,22 @@ import com.zwxu.lc.um.api.UserQueryService;
 import com.zwxu.lc.um.bean.UserInfo;
 
 @Controller
-@RequestMapping("/user")
-public class UserController {
-	private static Logger logger = Logger.getLogger(UserController.class);
+@RequestMapping(value="/api")
+public class ApiUserController {
+	private static Logger logger = Logger.getLogger(ApiUserController.class);
 	
 	@Resource
 	private UserQueryService userQueryService;
-	
-	@RequestMapping("/list")
-	public String list(HttpServletRequest request, HttpServletResponse response, @PathVariable Map<String, String> vars) {
+
+	@RequestMapping(value={"/list"})
+	public Object list(HttpServletRequest request, HttpServletResponse response, @PathVariable Map<String, String> vars) {
 		HttpSession session = request.getSession();
 		List<UserInfo> list=userQueryService.query(1);
-		logger.info("helll: "+list);
-		session.setAttribute("userList", list);
-		return "allUser";
+		Map<String, Object> data = new LinkedHashMap<String, Object>();
+		for(UserInfo info:list)
+		{
+			data.put("username", info.getUsername());
+		}
+		return data;
 	}
-
-	
 }
