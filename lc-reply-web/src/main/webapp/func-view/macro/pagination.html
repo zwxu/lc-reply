@@ -1,0 +1,118 @@
+<#macro pagination_su start limit total pageurl>
+	<#if start?? ><#assign start = -1 /></#if>
+	<#if limit?? ><#assign limit = -1 /></#if>
+	<#if total?? ><#assign total = -1 /></#if>
+	
+	<#if start gt 0 && limit gt 0 && total gt 0 >
+		<#assign firstpage = 1 />
+		<#if total % limit == 0 >
+			<#assign totalpage = (total/limit)?int />
+		<#else>
+			<#assign totalpage = (total/limit + 1)?int />
+		</#if>		
+		<#assign currentpage = start />
+		<#assign loopstart = currentpage - 3 />
+		<#assign loopend = currentpage + 3 />
+		<#assign currentpage = start />
+		<#-- 分页组件显示 -->
+		<nav>
+		  <ul class="pagination">
+		  	<#if currentpage gt firstpage>
+		  		<li><a href="${pageurl}${firstpage}"><span>&laquo;&laquo;</span><span class="sr-only">First</span></a></li>
+		  	<#else>
+		  		<li class="disabled"><a><span>&laquo;&laquo;</span><span class="sr-only">First</span></a></li>
+			</#if>
+			<#if currentpage - 1 gte firstpage>
+				<li><a href="${pageurl}${currentpage - 1}"><span>&laquo;</span><span class="sr-only">Previous</span></a></li>
+			<#else>
+		  		<li class="disabled"><a><span>&laquo;</span><span class="sr-only">Previous</span></a></li>
+			</#if>
+			<#list loopstart..loopend as index>
+				<#if index == currentpage>
+					<li class="active"><a>${index}</a></li>
+				<#elseif  index gte firstpage && index lte totalpage>
+					<li><a href="${pageurl}${index}">${index}<span class="sr-only">(current)</span></a></li>
+				</#if>
+			</#list>
+			<#if loopend lt totalpage>
+				<#if loopend + 1 lt totalpage>
+					<li class="disabled"><a>...</a></li>
+				</#if>
+					<li><a href="${pageurl}${totalpage}">${totalpage}</a></li>
+			</#if>
+			<#if currentpage + 1 lte totalpage>
+					<li><a href="${pageurl}${currentpage + 1}"><span>&raquo;</span><span class="sr-only">Next</span></a></li>
+			</#if>
+			<#if currentpage lt totalpage>
+					<li><a href="${pageurl}${totalpage}"><span>&raquo;&raquo;</span><span class="sr-only">Last</span></a></li>
+			</#if>
+		  </ul>
+		</nav>
+		<#-- 分页组件显示完成 -->	
+	<#else>
+		<!-- ${start}-${limit}-${total} -->
+	</#if> 
+</#macro>
+
+<#macro pagination_simple_su start limit total pageurl>
+	<#if start?? ><#assign start = -1 /></#if>
+	<#if limit?? ><#assign limit = -1 /></#if>
+	<#if total?? ><#assign total = -1 /></#if>
+	
+	<#if start gt 0 && limit gt 0 && total gt 0 >
+		<#assign firstpage = 1 />
+		<#if total % limit == 0 >
+			<#assign totalpage = (total/limit)?int />
+		<#else>
+			<#assign totalpage = (total/limit + 1)?int />
+		</#if>		
+		<#assign currentpage = start />
+		<#assign loopstart = currentpage - 3 />
+		<#assign loopend = currentpage + 3 />
+		<#assign currentpage = start />
+		<#-- 分页组件显示 -->
+		<nav>
+		  <ul class="pager">
+		  	<#if currentpage - 1 gte firstpage>
+		    <li><a href="${pageurl}${currentpage - 1}">&laquo;</a></li>
+		    </#if>
+		    <li class="disabled"><a href="#">${currentpage}/${totalpage}</a></li>
+		    <#if currentpage + 1 lte totalpage>
+		    <li><a href="${pageurl}${currentpage - 1}">&raquo;</a></li>
+		    </#if>
+		  </ul>
+		</nav>
+		<#-- 分页组件显示完成 -->	
+	<#else>
+		<!-- ${start}-${limit}-${total} -->
+	</#if> 
+</#macro>
+
+<#macro pagination_url pname>
+	<#compress>
+		<#assign requesturi>${rc.getRequestUri()}</#assign> 
+		<#assign querystring>
+			<#compress>
+				<#if rc.getQueryString()??>
+					${rc.getQueryString()?replace(pname + '=[^&]*[&]?','','r')?replace('&*$','','r')}
+				</#if>
+			</#compress>
+		</#assign>
+		<#assign pageurl>
+			<#compress>
+				${requesturi}?${querystring}<#if querystring?length gt 0 >&</#if>${pname}=
+			</#compress>
+		</#assign>
+		${pageurl}
+	</#compress>
+</#macro>
+
+<#macro pagination start limit total pname='start'>
+<#assign pageurl><@pagination_url pname=pname/></#assign>
+<@pagination_su start=start limit=limit total=total pageurl=pageurl />
+</#macro>
+  
+<#macro pagination_simple start limit total pname='start'>
+<#assign pageurl><@pagination_url pname=pname/></#assign>
+<@pagination_simple_su start=start limit=limit total=total pageurl=pageurl />
+</#macro>

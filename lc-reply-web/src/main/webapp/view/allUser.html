@@ -1,3 +1,4 @@
+<#import '/macro/pagination.html' as page>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -54,7 +55,7 @@
 						</td>
 					</tr>	
 			</#list>  		
-		
+		<@page.pagination start=start total=total limit=limit/>
 		</tbody>
 	</table>
   </body>

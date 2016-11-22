@@ -1,0 +1,75 @@
+<#macro pagination_su start limit total pageurl>
+	<#if start?? ><#assign start = -1 /></#if>
+	<#if limit?? ><#assign limit = -1 /></#if>
+	<#if total?? ><#assign total = -1 /></#if>
+	
+	<#if start gt 0 && limit gt 0 && total gt 0 >
+		<#assign firstpage = 1 />
+		<#if total % limit == 0 >
+			<#assign totalpage = (total/limit)?int />
+		<#else>
+			<#assign totalpage = (total/limit + 1)?int />
+		</#if>		
+		<#assign currentpage = start />
+		<#assign loopstart = currentpage - 3 />
+		<#assign loopend = currentpage + 3 />
+		<#assign currentpage = start />
+		<#-- 分页组件显示 -->
+		<nav>
+		<div class="m-page">
+		<div class="u-page">
+			<#if currentpage - 1 gte firstpage>
+				<a href="${pageurl}1" class="pre" hidefocus="hidefocus">首页</a>
+				<a href="${pageurl}${currentpage - 1}" class="pre" hidefocus="hidefocus">上一页</a>
+			</#if>
+			<ul>
+			<#list loopstart..loopend as index>
+				<#if index == currentpage>
+					<li class="crt"><a hidefocus="hidefocus">${index}</a></li>
+				<#elseif  index gte firstpage && index lte totalpage>
+					 <li><a href="${pageurl}${index}" hidefocus="hidefocus">${index}</a></li>
+				</#if>
+			</#list>
+			<#if loopend lt totalpage>
+				<#if loopend + 1 lt totalpage>
+					<li class="ellipsis">...</li>
+				</#if>
+					<li><a href="${pageurl}${totalpage}">${totalpage}</a></li>
+			</#if>
+			</ul>
+			<#if currentpage + 1 lte totalpage>
+				<a href="${pageurl}${currentpage + 1}" class="next " hidefocus="hidefocus">下一页</a>
+			</#if>
+		  </div>
+		</div>
+		</nav>
+		<#-- 分页组件显示完成 -->	
+	<#else>
+		<!-- ${start}-${limit}-${total} -->
+	</#if> 
+</#macro>
+
+<#macro pagination_url pname>
+	<#compress>
+		<#assign requesturi>${rc.getRequestUri()}</#assign> 
+		<#assign querystring>
+			<#compress>
+				<#if rc.getQueryString()??>
+					${rc.getQueryString()?replace(pname + '=[^&]*[&]?','','r')?replace('&*$','','r')}
+				</#if>
+			</#compress>
+		</#assign>
+		<#assign pageurl>
+			<#compress>
+				${requesturi}?${querystring}<#if querystring?length gt 0 >&</#if>${pname}=
+			</#compress>
+		</#assign>
+		${pageurl}
+	</#compress>
+</#macro>
+
+<#macro pagination start limit total pname='start'>
+<#assign pageurl><@pagination_url pname=pname/></#assign>
+<@pagination_su start=start limit=limit total=total pageurl=pageurl />
+</#macro>
+  

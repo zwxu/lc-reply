@@ -1,0 +1,42 @@
+<#macro showSubMenu parentMenu="">
+    <#if parentMenu.subMenu?? >
+    <ol>
+        <#list parentMenu.subMenu as menu >
+        <#if menu.status >
+            <#if menu.menuUrl=="#">
+            <li>
+              <p>${menu.menuName}</p>
+              <@showSubMenu parentMenu=menu />
+            </li>
+            <#else>
+            <li id="${menu.menuCode}">
+              <a target="<#if menu.menuUrl?contains('_external=true')>_blank</#if>" href="<#if menu.menuUrl?contains('http')>${menu.menuUrl}<#else><@appurl path='${menu.menuUrl}' /></#if>" >${menu.menuName}</a>
+              </li>
+            </#if>
+        </#if>
+        </#list>
+    </ol>
+    </#if>
+</#macro>
+
+<#macro menuExsit parentMenu="" type="">
+    <#if parentMenu.subMenu?? >
+        <#list parentMenu.subMenu as menu >
+        <#if menu.status >
+            <#if menu.menuUrl=="#">
+              <@menuExsit parentMenu=menu type=type/>
+            <#else>
+	             <#if menu.menuUrl == '/statistics/index'>
+	                <#if type == 'body'>
+	                    <script type="text/javascript">
+	                        window.location="<@appurl path='/statistics/index' />";
+	                    </script>  
+                    <#else>
+                         <meta http-equiv="refresh" content="0;url=<@appurl path='/statistics/index' />">   
+                    </#if>       
+	             </#if>           
+            </#if>
+        </#if>
+        </#list>
+    </#if>
+</#macro>
