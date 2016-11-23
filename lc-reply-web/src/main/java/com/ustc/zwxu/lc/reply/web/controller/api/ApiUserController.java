@@ -1,4 +1,4 @@
-package com.ustc.zwxu.lc.reply.web.controller.api;
+/*package com.ustc.zwxu.lc.reply.web.controller.api;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,3 +40,4 @@ public class ApiUserController {
 		return data;
 	}
 }
+*/

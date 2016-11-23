@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zwxu.lc.um.api.UserQueryService;
+import com.zwxu.lc.um.bean.QueryResult;
 import com.zwxu.lc.um.bean.UserInfo;
 
 @Controller
@@ -36,13 +37,13 @@ public class UserController {
 		{
 			start=String.valueOf(1);
 		}
-		int limit = 2;
-		
+        int limit=2;
+		QueryResult result=userQueryService.queryPage(Integer.parseInt(start),limit);
+		logger.info(result.getInfo());
 		model.addAttribute("limit", limit) ;
-		model.addAttribute("total", 6) ;
+		model.addAttribute("total", result.getCount()) ;
 		model.addAttribute("start", Integer.parseInt(start));
-		List<UserInfo> list=userQueryService.queryPage(Integer.parseInt(start),limit);
-		session.setAttribute("userList", list);
+		session.setAttribute("userList", result.getInfo());
 		return "allUser";
 	}
 
