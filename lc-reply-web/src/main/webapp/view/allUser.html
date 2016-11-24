@@ -2,7 +2,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <!-- <base href="<%=basePath%>"> -->
+    <!-- <base href="<%=basePath%>">  -->
     <script type="text/javascript" src="../js/jquery-2.2.1.min.js"></script>
     <title>用户列表</title>
     
@@ -37,7 +37,7 @@
   </head>
   
   <body>
-    <h6><a href="/user/toAddUser">添加用户</a></h6>
+    <h6><a href="./toAddUser">添加用户</a></h6>
 	<table border="1">
 		<tbody>
 			<tr>
@@ -47,10 +47,10 @@
 			</tr>
 			<#list userList as user>  
 					<tr>
-						<td>${user.username }</td>
+						<td>${user.loginname }</td>
 						<td id="demo">${user.password }</td>
 						<td>
-							<a href="/user/getUser?id=${user.id}">编辑</a>
+							<a href="./user/getUser?id=${user.id}">编辑</a>
 							<a href="javascript:del('${user.id }')">删除</a>
 						</td>
 					</tr>	

@@ -17,17 +17,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zwxu.lc.um.api.UserQueryService;
 import com.zwxu.lc.um.bean.QueryResult;
-import com.zwxu.lc.um.bean.UserInfo;
+import com.zwxu.lc.um.api.AccountQueryService;
+import com.zwxu.lc.um.bean.AccountInfoResponse;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
-	private static Logger logger = Logger.getLogger(UserController.class);
+public class AccountController {
+	private static Logger logger = Logger.getLogger(AccountController.class);
 	
 	@Resource
-	private UserQueryService userQueryService;
+	private AccountQueryService accountQueryService;
 	
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, HttpServletResponse response, ModelMap model,@PathVariable Map<String, String> vars) {
@@ -38,7 +38,7 @@ public class UserController {
 			start=String.valueOf(1);
 		}
         int limit=2;
-		QueryResult result=userQueryService.queryPage(Integer.parseInt(start),limit);
+		QueryResult result=accountQueryService.queryPage(Integer.parseInt(start),limit);
 		logger.info(result.getInfo());
 		model.addAttribute("limit", limit) ;
 		model.addAttribute("total", result.getCount()) ;

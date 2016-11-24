@@ -27,4 +27,17 @@ public class HomeController {
 	public String index_nologin(HttpServletRequest request, HttpServletResponse response, @PathVariable Map<String, String> vars) {
 		return "index";
 	}
+	
+	@RequestMapping(value = {"/login"})
+    public String login(HttpServletRequest request) {
+        //return redirect(request, "/loginpage");
+        return "loginpage";
+    }
+	
+	public static String redirect(HttpServletRequest request, String path) {
+        String url = String.format("redirect:%s/#" + path,
+                request.getContextPath());
+
+        return url;
+    }
 }

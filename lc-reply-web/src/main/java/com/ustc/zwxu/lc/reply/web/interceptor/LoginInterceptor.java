@@ -1,12 +1,19 @@
 package com.ustc.zwxu.lc.reply.web.interceptor;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import com.zwxu.lc.um.api.AccountQueryService;
 
-public class MyHandlerInterceptor implements HandlerInterceptor{
+public class LoginInterceptor implements HandlerInterceptor{
+	private static Logger logger = Logger.getLogger(LoginInterceptor.class);
+	
+	@Resource
+	private AccountQueryService accountQueryService;
 
 	/**
 	 * 前置方法，从前向后执行
@@ -17,32 +24,25 @@ public class MyHandlerInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		// TODO Auto-generated method stub
-		String url=request.getRequestURL().toString();
-		String username=request.getParameter("username");
-		if(username.equals("admin"))
+		
+		String username=request.getParameter("loginname");
+		if(username == null)
+		{
+			logger.info("error");
+			return false;
+		}
+		boolean flag = accountQueryService.checkAccount(username);
+		logger.info(flag);
+		if(flag)
 		{
 			return true;
 		}
 		else
 		{
-			response.sendRedirect("/error.jsp");
+			response.sendRedirect(request.getContextPath()+"/login");
 		}
 		
-		/*if(url.endsWith("login"))
-		{
-			if(username.equals("admin"))
-			{
-				return true;
-			}
-			else
-			{
-				response.sendRedirect("/error.jsp");
-			}
-		}
-		else
-		{
-			return true;
-		}*/
+		
 		return false;
 	}
 

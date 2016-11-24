@@ -122,29 +122,26 @@
 	<mvc:view-controller path="/401" view-name="/401" />
 	<mvc:view-controller path="/404" view-name="/404" />
 
-<!-- 	<bean id="urlInterceptor"
-		class="com.xiaomi.finance.lc.fund.web.interceptor.UrlInterceptor"></bean>
-		
+	<bean id="loginInterceptor"
+		class="com.ustc.zwxu.lc.reply.web.interceptor.LoginInterceptor"></bean>
 	<mvc:interceptors>
-		
 		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<bean id="accountRequiredInterceptorProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
-				这里代理的是接口
-				<property name="proxyInterfaces">
-					<value>org.springframework.web.servlet.HandlerInterceptor</value>
-				</property>
-				<property name="target">
-					<ref bean="accountRequiredInterceptor" />
-				</property>
-			</bean>
-		</mvc:interceptor>
-	</mvc:interceptors> -->
-
+				<mvc:mapping path="/doLogin/**" />
+				<bean id="loginRequiredInterceptorProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+					<!--这里代理的是接口 -->
+					<property name="proxyInterfaces">
+						<value>org.springframework.web.servlet.HandlerInterceptor</value>
+					</property>
+					<property name="target">
+						<ref bean="loginInterceptor" />
+					</property>
+				</bean>
+		</mvc:interceptor> 
+	</mvc:interceptors>
 	<!-- <import resource="classpath:META-INF/spring/context-fund-service.xml" />
  -->
-	<jaxws:client id="userQueryService"
-        serviceClass="com.zwxu.lc.um.api.UserQueryService" 
+	<jaxws:client id="accountQueryService"
+        serviceClass="com.zwxu.lc.um.api.AccountQueryService" 
         address="${query.url}" />
 
 </beans>  
