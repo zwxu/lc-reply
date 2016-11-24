@@ -15,9 +15,9 @@
 
 	<h1>Login</h1>
 
-	<div id="login-error">${error}</div>
+	<div id="login-error">${Request["error"]}</div>
 
-	<form action="./doLogin" method="post">
+	<form action="./user/doLogin" method="post">
 
 		<p>
 			<label for="loginname">用户名</label> <input id="loginname"

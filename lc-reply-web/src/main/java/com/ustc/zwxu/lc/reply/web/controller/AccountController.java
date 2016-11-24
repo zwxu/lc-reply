@@ -1,6 +1,7 @@
 package com.ustc.zwxu.lc.reply.web.controller;
 
 
+import java.io.IOException;
 import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -41,6 +42,22 @@ public class AccountController {
 		model.addAttribute("start", Integer.parseInt(start));
 		session.setAttribute("userList", result.getInfo());
 		return "allUser";
+	}
+	
+	@RequestMapping("/doLogin")
+	public String checkUser(HttpServletRequest request, HttpServletResponse response, ModelMap model,@PathVariable Map<String, String> vars) {
+		HttpSession session = request.getSession();
+		String username = request.getParameter("loginname");
+		boolean flag = accountQueryService.checkAccount(username);
+		logger.info(flag);
+		if(flag==true)
+		{
+			
+			session.setAttribute("loginname", username);
+			return "allUser";
+		}
+		return "loginpage";
+
 	}
 
 	

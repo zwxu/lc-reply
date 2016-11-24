@@ -126,7 +126,7 @@
 		class="com.ustc.zwxu.lc.reply.web.interceptor.LoginInterceptor"></bean>
 	<mvc:interceptors>
 		<mvc:interceptor>
-				<mvc:mapping path="/doLogin/**" />
+				<mvc:mapping path="/**" />
 				<bean id="loginRequiredInterceptorProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
 					<!--这里代理的是接口 -->
 					<property name="proxyInterfaces">
