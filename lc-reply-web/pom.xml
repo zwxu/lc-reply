@@ -18,6 +18,10 @@
 
 <dependencies>
 		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-jaxrs</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>javax.servlet</groupId>
   			<artifactId>servlet-api</artifactId>
 		</dependency>
@@ -163,7 +167,7 @@
 						</connector>
 					</connectors>
 					<webAppConfig>
-						<contextPath>/${project.artifactId}</contextPath>
+						<contextPath>/</contextPath>
 					</webAppConfig>
 				</configuration>
     </plugin>	

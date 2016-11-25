@@ -1,4 +1,4 @@
-/*package com.ustc.zwxu.lc.reply.web.controller.api;
+package com.ustc.zwxu.lc.reply.web.controller.api;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,31 +13,41 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.zwxu.lc.um.api.UserQueryService;
-import com.zwxu.lc.um.bean.UserInfo;
+import com.zwxu.lc.um.api.AccountQueryService;
+import com.zwxu.lc.um.bean.QueryResult;
+
 
 @Controller
-@RequestMapping(value="/api")
+@RequestMapping("/api")
 public class ApiUserController {
 	private static Logger logger = Logger.getLogger(ApiUserController.class);
 	
 	@Resource
-	private UserQueryService userQueryService;
+	private AccountQueryService accountQueryService;
 
-	@RequestMapping(value={"/list"})
-	public Object list(HttpServletRequest request, HttpServletResponse response, @PathVariable Map<String, String> vars) {
-		HttpSession session = request.getSession();
-		List<UserInfo> list=userQueryService.query(1);
-		Map<String, Object> data = new LinkedHashMap<String, Object>();
-		for(UserInfo info:list)
+	@RequestMapping("/list")
+	@ResponseBody
+	public Object list(HttpServletRequest request, HttpServletResponse response, ModelMap model,@PathVariable Map<String, String> vars) {
+
+		String start = request.getParameter("start");
+		if(start ==null)
 		{
-			data.put("username", info.getUsername());
+			start=String.valueOf(1);
 		}
+        int limit=6;
+		QueryResult result=accountQueryService.queryPage(Integer.parseInt(start),limit);
+		logger.info(result.getInfo());
+		model.addAttribute("limit", limit) ;
+		model.addAttribute("total", result.getCount()) ;
+		model.addAttribute("start", Integer.parseInt(start));
+		Map<String, Object> data = new LinkedHashMap<String, Object>();
+		data.put("userList", result.getInfo());
 		return data;
 	}
 }
-*/
