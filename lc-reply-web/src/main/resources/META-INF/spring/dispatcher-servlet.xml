@@ -142,6 +142,10 @@
  -->
 	<jaxws:client id="accountQueryService"
         serviceClass="com.zwxu.lc.um.api.AccountQueryService" 
-        address="${query.url}" />
+        address="${account.query.url}" />
+        
+    <jaxws:client id="studentQueryService"
+        serviceClass="com.zwxu.lc.um.api.StudentQueryService" 
+        address="${student.query.url}" />
 
 </beans>  

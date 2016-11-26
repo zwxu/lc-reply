@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost_3306
-Source Server Version : 50631
+Source Server Version : 50520
 Source Host           : localhost:3306
 Source Database       : ustc
 
 Target Server Type    : MYSQL
-Target Server Version : 50631
+Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2016-11-24 11:03:40
+Date: 2016-11-26 17:36:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -80,15 +80,14 @@ INSERT INTO `t_role` VALUES ('3', 'student', '答辩学生', '2016-11-23 14:05:3
 DROP TABLE IF EXISTS `t_student`;
 CREATE TABLE `t_student` (
   `id` int(11) NOT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  `school` varchar(255) DEFAULT NULL,
-  `number` int(10) DEFAULT NULL,
+  `username` varchar(50) DEFAULT NULL,
+  `school` varchar(50) DEFAULT NULL,
+  `number` varchar(50) DEFAULT NULL,
   `groupid` int(10) DEFAULT NULL,
   `aid` int(11) DEFAULT NULL,
-  `tid` int(10) DEFAULT NULL,
   `pass_count` int(10) DEFAULT NULL,
   `reject_count` int(10) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
+  `status` varchar(10) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -96,12 +95,21 @@ CREATE TABLE `t_student` (
 -- ----------------------------
 -- Records of t_student
 -- ----------------------------
-INSERT INTO `t_student` VALUES ('1', 'haha', null, '0', null, null, '1', null, null, null, '2016-09-22 17:15:27');
-INSERT INTO `t_student` VALUES ('2', 'sss', '', '0', null, null, '1', null, null, '', '2016-09-22 17:15:27');
-INSERT INTO `t_student` VALUES ('3', 'sss', '', null, '0', null, null, '1', null, '', '2016-09-23 18:12:00');
-INSERT INTO `t_student` VALUES ('4', 'sss', '', null, '0', null, null, '1', null, '', '2016-09-23 18:12:00');
-INSERT INTO `t_student` VALUES ('5', 'sss', '', null, '0', null, null, '1', null, '', '2016-09-23 18:12:00');
-INSERT INTO `t_student` VALUES ('6', 'sss', '', null, '0', null, null, '1', null, '', '2016-09-23 18:12:00');
+INSERT INTO `t_student` VALUES ('1', '张三', '软件学院', 'SA16001', null, '1', null, null, null, '2016-09-22 17:15:27');
+INSERT INTO `t_student` VALUES ('2', '李四', '软件学院', 'SA16002', null, '2', null, null, '', '2016-09-22 17:15:27');
+INSERT INTO `t_student` VALUES ('3', '王五', '软件学院', 'SA16003', null, '3', null, null, '', '2016-09-23 18:12:00');
+INSERT INTO `t_student` VALUES ('4', '刘翔', '软件学院', 'SA16004', null, '4', null, null, '', '2016-09-23 18:12:00');
+INSERT INTO `t_student` VALUES ('5', '孙杨', '软件学院', 'SA16005', null, '5', null, null, '', '2016-09-23 18:12:00');
+INSERT INTO `t_student` VALUES ('6', '宁泽涛', '软件学院', 'SA16006', null, '6', null, null, '', '2016-09-23 18:12:00');
+INSERT INTO `t_student` VALUES ('7', '科比', '软件学院', 'SA16007', null, '7', null, null, null, '2016-09-22 17:15:27');
+INSERT INTO `t_student` VALUES ('8', '麦蒂', '软件学院', 'SA16008', null, '8', null, null, '', '2016-09-22 17:15:27');
+INSERT INTO `t_student` VALUES ('9', '姚明', '软件学院', 'SA16009', null, '9', null, null, '', '2016-09-22 17:15:27');
+INSERT INTO `t_student` VALUES ('10', '易建联', '软件学院', 'SA16010', null, '10', null, null, '', '2016-09-22 17:15:27');
+INSERT INTO `t_student` VALUES ('11', '林书豪', '软件学院', 'SA16011', null, '11', null, null, '', '2016-09-22 17:15:27');
+INSERT INTO `t_student` VALUES ('12', '林丹', '软件学院', 'SA16012', null, '12', null, null, '', '2016-09-22 17:15:27');
+INSERT INTO `t_student` VALUES ('13', '邓超', '软件学院', 'SA16013', null, '13', null, null, '', '2016-09-22 17:15:27');
+INSERT INTO `t_student` VALUES ('14', '李晨', '软件学院', 'SA16014', null, '14', null, null, '', '2016-09-22 17:15:27');
+INSERT INTO `t_student` VALUES ('15', '杨颖', '软件学院', 'SA16015', null, '15', null, null, '', '2016-09-22 17:15:27');
 
 -- ----------------------------
 -- Table structure for t_teacher

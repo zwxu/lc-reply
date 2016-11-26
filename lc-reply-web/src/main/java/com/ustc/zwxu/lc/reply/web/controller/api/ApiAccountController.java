@@ -1,4 +1,4 @@
-package com.ustc.zwxu.lc.reply.web.controller.api;
+/*package com.ustc.zwxu.lc.reply.web.controller.api;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,13 +20,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zwxu.lc.um.api.AccountQueryService;
-import com.zwxu.lc.um.bean.QueryResult;
+import com.zwxu.lc.um.bean.QueryStudentResult;
 
 
 @Controller
 @RequestMapping("/api")
-public class ApiUserController {
-	private static Logger logger = Logger.getLogger(ApiUserController.class);
+public class ApiAccountController {
+	private static Logger logger = Logger.getLogger(ApiAccountController.class);
 	
 	@Resource
 	private AccountQueryService accountQueryService;
@@ -41,7 +41,7 @@ public class ApiUserController {
 			start=String.valueOf(1);
 		}
         int limit=6;
-		QueryResult result=accountQueryService.queryPage(Integer.parseInt(start),limit);
+		QueryStudentResult result=accountQueryService.queryPage(Integer.parseInt(start),limit);
 		logger.info(result.getInfo());
 		model.addAttribute("limit", limit) ;
 		model.addAttribute("total", result.getCount()) ;
@@ -51,3 +51,4 @@ public class ApiUserController {
 		return data;
 	}
 }
+*/

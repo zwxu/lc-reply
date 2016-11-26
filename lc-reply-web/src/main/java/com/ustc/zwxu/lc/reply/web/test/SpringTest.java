@@ -1,4 +1,4 @@
-package com.ustc.zwxu.lc.reply.web.controller.api;
+package com.ustc.zwxu.lc.reply.web.test;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
