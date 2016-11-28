@@ -147,5 +147,9 @@
     <jaxws:client id="studentQueryService"
         serviceClass="com.zwxu.lc.um.api.StudentQueryService" 
         address="${student.query.url}" />
+        
+     <jaxws:client id="menuQueryService"
+    serviceClass="com.zwxu.lc.um.api.MenuQueryService" 
+    address="${menu.query.url}" />
 
 </beans>  
