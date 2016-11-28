@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost_3306
-Source Server Version : 50520
+Source Server Version : 50631
 Source Host           : localhost:3306
 Source Database       : ustc
 
 Target Server Type    : MYSQL
-Target Server Version : 50520
+Target Server Version : 50631
 File Encoding         : 65001
 
-Date: 2016-11-26 17:36:36
+Date: 2016-11-28 19:28:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -47,13 +47,33 @@ CREATE TABLE `t_menu` (
   `menu_name` varchar(255) DEFAULT NULL,
   `menu_url` varchar(255) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
-  `parent_id` int(11) DEFAULT NULL
+  `parent_id` int(11) DEFAULT NULL,
+  `status` char(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_menu
 -- ----------------------------
-INSERT INTO `t_menu` VALUES ('1', '学生列表', '/userList', '1', null);
+INSERT INTO `t_menu` VALUES ('1', '学生列表', '/student/index', '1', '0', '1');
+INSERT INTO `t_menu` VALUES ('2', '老师列表', '/teacher/index', '2', '0', '1');
+
+-- ----------------------------
+-- Table structure for t_menu_role
+-- ----------------------------
+DROP TABLE IF EXISTS `t_menu_role`;
+CREATE TABLE `t_menu_role` (
+  `id` int(11) NOT NULL,
+  `menu_id` int(11) DEFAULT NULL,
+  `role_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_menu_role
+-- ----------------------------
+INSERT INTO `t_menu_role` VALUES ('1', '1', '1');
+INSERT INTO `t_menu_role` VALUES ('2', '2', '1');
+INSERT INTO `t_menu_role` VALUES ('3', '2', '2');
+INSERT INTO `t_menu_role` VALUES ('4', '1', '3');
 
 -- ----------------------------
 -- Table structure for t_role
