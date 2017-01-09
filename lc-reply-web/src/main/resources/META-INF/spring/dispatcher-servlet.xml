@@ -143,7 +143,11 @@
 	<jaxws:client id="accountQueryService"
         serviceClass="com.zwxu.lc.um.api.AccountQueryService" 
         address="${account.query.url}" />
-        
+      
+    <jaxws:client id="teacherQueryService"
+        serviceClass="com.zwxu.lc.um.api.TeacherQueryService" 
+        address="${teacher.query.url}" />
+          
     <jaxws:client id="studentQueryService"
         serviceClass="com.zwxu.lc.um.api.StudentQueryService" 
         address="${student.query.url}" />
