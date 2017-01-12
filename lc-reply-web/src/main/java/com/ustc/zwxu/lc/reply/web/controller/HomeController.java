@@ -30,23 +30,37 @@ public class HomeController {
 	//@RequestMapping(value = {"/"})
 	public String index_nologin(HttpServletRequest request, HttpServletResponse response, @PathVariable Map<String, String> vars) {
 		return assetsEnv+"_index";
+
 	}
 	
-	@RequestMapping(value = {"/login"})
-    public String login(HttpServletRequest request) {
-        //return redirect(request, "/loginpage");
-        return "loginpage";
+	 /**
+     * 转发到vue
+     **/
+   /* @RequestMapping(value = "/login")
+    public String login(HttpServletRequest request,
+                                     HttpServletResponse response) {
+        
+        return "redirect:#!/login";
+    }*/
+    
+   @RequestMapping(value = "/forbidden")
+    public String forbidden(HttpServletRequest request,
+                                     HttpServletResponse response) {
+        request.getSession().setAttribute("auth", "error");
+        return "redirect:#!/forbidden";
     }
-	
-	public static String redirect(HttpServletRequest request, String path) {
-        String url = String.format("redirect:%s/#" + path,
+
+  
+    /** 转发到vue **/
+
+    /**
+     * 转发到vue-router
+     */
+    public static String redirect(HttpServletRequest request, String path) {
+        String url = String.format("redirect:%s/#!" + path,
                 request.getContextPath());
 
         return url;
     }
 	
-	@RequestMapping(value = {"/pub"}, params = "nologin=true")
-	public String pub_index_nologin(HttpServletRequest request, HttpServletResponse response, @PathVariable Map<String, String> vars) {
-		return assetsEnv + "_index";
-	}
 }
